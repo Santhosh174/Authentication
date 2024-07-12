@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
   html{
     scroll-behavior: smooth;
@@ -70,7 +70,88 @@ body {
     width: 60%;
     height: 60%;
 }
+.discover{
+    padding: 12vh 0vw;
+    text-align: center;
+}
+.discover h1{
+    
+    margin: 0 auto;
+    width: 60%;
+    font-size: 4rem;
+}
+.discover p{
+    margin: 4vh auto;
+    font-size: 20px;
+    color: gray;
+    width: 70%;
+}
+.custom-carousel {
+    width: 60%; 
+    margin: 0 auto; 
+  }
+  .custom-carousel .carousel-inner img {
+    height: 70vh;
+    object-fit: cover; 
+  }
+  .special {
+    min-height: 100vh;
+    background: linear-gradient(to right, #23bb62, #1fc5c1);
+    padding: 10% 3%;
+    text-align: center;
+}
 
+.special h1 {
+    color: white;
+    font-size: 3rem;
+}
+
+.carrd {
+    position: relative;
+    display: inline-block;
+    margin: 5% 2%;
+    width: 30%; 
+    max-width: 200px; 
+    height: auto;
+    overflow: hidden;
+}
+.carrd img {
+    width: 100%;
+    height: auto;
+}
+
+.special .off {
+    position: absolute;
+    bottom: 0; 
+    left: 2vw;
+    background-color: rgba(255, 255, 255); 
+    padding: 1px; 
+    width: 80%;
+    text-align: center;
+}
+.carrd h6 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red; 
+    color: #fff;
+    padding: 0.5em 1em;
+    margin: 0;
+    font-size: 1rem;
+}
+.special .off h4 {
+    color: #000;
+    font-size: 1.2rem; 
+    margin-top: 2vh; 
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.special .off p {
+    font-size: 1rem;
+}
+.special span{
+    text-decoration: line-through;
+}
 #myBtn {
     display: none;
     position: fixed;
