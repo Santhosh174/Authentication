@@ -1,46 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlipZon</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <%- include('./partial/head.ejs') %>            
 <body>
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"
         style="color: #ffffff;"></i></button>
 <!--navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#" id="logo">FlipZon</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-light">
-            <span class="navbar-toggler-icon "></span>
-            </nav>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+ <%- include('./partial/navbar.ejs') %>
 <!--Header-->
 <section class="head">
     <div class="content">
@@ -49,7 +14,7 @@
         <a href="#">Explore More</a>
     </div>
     <div class="head-pic">
-        <img src="./img/head-img.png" alt="header image">
+        <img src="/img/head-img.png" alt="header image">
     </div>
 </section>
 <!--Discover-->
@@ -64,13 +29,13 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="./img/realme.jpg" alt="First slide">
+            <img class="d-block w-100" src="/img/realme.jpg" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="./img/laptop.png" alt="Second slide">
+            <img class="d-block w-100" src="/img/laptop.png" alt="Second slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="./img/watch.jpg" alt="Third slide">
+            <img class="d-block w-100" src="/img/watch.jpg" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -87,7 +52,7 @@
 <section class="special">
     <h1>Trending This Week</h1>
     <div class="carrd">
-        <img src="./img/chair.jpg" alt="">
+        <img src="/img/chair.jpg" alt="chair pic">
         <h6>-30%</h6>
         <div class="off">
             <h4>Chair</h4>
@@ -95,7 +60,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="./img/shoe.jpg" alt="">
+        <img src="/img/shoe.jpg" alt="shoe pic">
         <h6>-40%</h6>
         <div class="off">
             <h4>Shoe</h4>
@@ -103,7 +68,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="./img/headphone.jpg"alt="">
+        <img src="/img/headphone.jpg"alt="headphone pic">
         <h6>-30%</h6>
         <div class="off">
             <h4>HeadPhone</h4>
@@ -111,7 +76,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="./img/tshirt.jpg" alt="">
+        <img src="/img/tshirt.jpg" alt="T-shirt pic">
         <h6>-50%</h6>
         <div class="off">
             <h4>T-shirt</h4>
@@ -119,7 +84,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="./img/tv.jpg" alt="">
+        <img src="/img/tv.jpg" alt="tv-pic">
         <h6>-60%</h6>
         <div class="off">
             <h4>TV</h4>
