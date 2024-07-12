@@ -9,6 +9,7 @@ body {
   }
 .navbar {
     background: linear-gradient(to right, #23bb62, #1fc5c1)!important;
+    transition: 0.8s;
 }
 #logo{
     font-size: 30px;
@@ -27,6 +28,7 @@ body {
     width: 100%;
     background: #000000 !important;
     z-index: 1000;
+    transition: 0.8s;
 }
 
 .sticky .navbar-brand,
