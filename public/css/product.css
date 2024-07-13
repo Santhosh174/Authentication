@@ -1,0 +1,45 @@
+
+.product{
+    padding: 40px;
+}
+.product h1{
+    text-align: center;
+    font-size: 4rem;
+}
+.cat{
+    display: flex;
+    justify-content: center;
+}
+.cat .active{
+    background: linear-gradient(to right, #23bb62, #1fc5c1);
+    color: white;
+}
+.cat button{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin: 4vh 2vw;
+}
+.custom-card {
+    background-color: black;
+    color: white;
+  }
+  .custom-card a {
+    color: white; 
+  }
+  .abtn{
+    background-color: white;
+    color: black !important;
+    padding: 5px 10px;
+    border-radius: 5px
+  }
+  .show.active{
+    display: block;
+  }
+  .show{
+    display: none;
+  }

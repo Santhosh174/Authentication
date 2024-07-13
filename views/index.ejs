@@ -2,8 +2,7 @@
 <html lang="en">
     <%- include('./partial/head.ejs') %>            
 <body>
-    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"
-        style="color: #ffffff;"></i></button>
+    
 <!--navbar-->
  <%- include('./partial/navbar.ejs') %>
 <!--Header-->
@@ -11,14 +10,14 @@
     <div class="content">
         <h1>Discover Amazing Deals on Flipzon</h1>
         <p>Discover a wide array of products at incredible prices. Upgrade your tech or refresh your wardrobe effortlessly at Flipzon.</p>
-        <a href="#">Explore More</a>
+        <a href="#discover">Explore More</a>
     </div>
     <div class="head-pic">
         <img src="/img/head-img.png" alt="header image">
     </div>
 </section>
 <!--Discover-->
-<section class="discover">
+<section class="discover" id="discover">
     <h1>Discover Our Latest Collection</h1>
     <p>Explore our cutting-edge gadgets designed to simplify your life and elevate your tech game. From the latest smart devices to innovative accessories, our new collection offers something for every tech enthusiast. Experience the future of technology today!</p>
     <div id="carouselExampleIndicators" class="carousel slide custom-carousel" data-ride="carousel">
@@ -49,10 +48,10 @@
       </div>
 </section>
 <!--Special offers-->
-<section class="special">
+<section class="special" id="offers">
     <h1>Trending This Week</h1>
     <div class="carrd">
-        <img src="/img/chair.jpg" alt="chair pic">
+        <img src="/img/chair.jpeg" alt="chair pic" loading="lazy" id="image">
         <h6>-30%</h6>
         <div class="off">
             <h4>Chair</h4>
@@ -60,7 +59,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="/img/shoe.jpg" alt="shoe pic">
+        <img src="/img/shoe.jpeg" alt="shoe pic" loading="lazy" id="image">
         <h6>-40%</h6>
         <div class="off">
             <h4>Shoe</h4>
@@ -68,7 +67,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="/img/headphone.jpg"alt="headphone pic">
+        <img src="/img/headphone.jpeg" alt="headphone pic" loading="lazy" id="image">
         <h6>-30%</h6>
         <div class="off">
             <h4>HeadPhone</h4>
@@ -76,7 +75,7 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="/img/tshirt.jpg" alt="T-shirt pic">
+        <img src="/img/tshirt.jpeg" alt="T-shirt pic" loading="lazy" id="image">
         <h6>-50%</h6>
         <div class="off">
             <h4>T-shirt</h4>
@@ -84,40 +83,24 @@
         </div>
     </div>
     <div class="carrd">
-        <img src="/img/tv.jpg" alt="tv-pic">
+        <img src="/img/tv.jpeg" alt="tv-pic" loading="lazy" id="image">
         <h6>-60%</h6>
         <div class="off">
             <h4>TV</h4>
             <p><span>&#8377; 75,000</span> -- &#8377; 30,000</p>
         </div>
     </div>
+    <a href="product">View More Products</a>
 </section>
+
+<!--footer-->
+<%- include('./partial/footer.ejs') %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-
-let navbar = document.querySelector("nav");
-
-
-    let mybutton = document.getElementById("myBtn");
-    window.onscroll = function () { scrollFunction() };
-    function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        navbar.classList.add("sticky");
-        mybutton.style.display = "block";
-      } else {
-        navbar.classList.remove("sticky");
-        mybutton.style.display = "none";
-      }
-    }
-    function topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-</script>
+<%- include('./partial/script.ejs') %>
 
 </body>
 </html>

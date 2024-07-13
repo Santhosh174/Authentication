@@ -22,6 +22,15 @@ body {
     color: white !important;
     font-family: 'Ubuntu', sans-serif;
 }
+#in,#up{
+    background-color: white;
+    padding: 8px;
+    border-radius: 5px;
+    color: black !important;
+}
+#in:hover,#up:hover{
+    background-color: rgb(167, 255, 159);
+}
 .sticky {
     position: fixed;
     top: 0;
@@ -73,7 +82,7 @@ body {
     height: 60%;
 }
 .discover{
-    padding: 12vh 0vw;
+    padding: 20vh 0vw;
     text-align: center;
 }
 .discover h1{
@@ -97,9 +106,8 @@ body {
     object-fit: cover; 
   }
   .special {
-    min-height: 100vh;
     background: linear-gradient(to right, #23bb62, #1fc5c1);
-    padding: 10% 3%;
+    padding: 10% 3% 7% 3%;
     text-align: center;
 }
 
@@ -116,16 +124,17 @@ body {
     max-width: 200px; 
     height: auto;
     overflow: hidden;
+    background-color: #f0f0f0; 
 }
 .carrd img {
     width: 100%;
-    height: auto;
+    height: 50vh;
 }
 
 .special .off {
     position: absolute;
     bottom: 0; 
-    left: 2vw;
+    left: 1.5vw;
     background-color: rgba(255, 255, 255); 
     padding: 1px; 
     width: 80%;
@@ -154,6 +163,22 @@ body {
 .special span{
     text-decoration: line-through;
 }
+.special a{
+    color: #000;
+    background-color: white;
+    padding: 10px 15px;
+    width: 20%;
+    margin: 1em auto 0 auto;    
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.9s;
+    display: block; 
+}
+.special a:hover{
+    background-color: black;
+    color: white;
+    transition: 0.9s;
+}
 #myBtn {
     display: none;
     position: fixed;
@@ -169,3 +194,4 @@ body {
     padding: 15px;
     border-radius: 10px;
 }
+

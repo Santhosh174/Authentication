@@ -1,0 +1,35 @@
+<script>
+
+    let navbar = document.querySelector("nav");
+    
+    
+        let mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            navbar.classList.add("sticky");
+            mybutton.style.display = "block";
+          } else {
+            navbar.classList.remove("sticky");
+            mybutton.style.display = "none";
+          }
+        }
+        function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        }
+    
+        document.querySelectorAll('.cat button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelector('.cat .active').classList.remove('active');
+                this.classList.add('active');
+                
+                document.querySelectorAll('.show').forEach(show => {
+                    show.classList.remove('active');
+                });
+                document.getElementById(this.dataset.target).classList.add('active');
+            });
+        });
+      
+    
+    </script>
