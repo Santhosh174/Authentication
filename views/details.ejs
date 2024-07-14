@@ -1,0 +1,81 @@
+<html lang="en">
+<%- include('./partial/head.ejs') %>
+<body style="background: linear-gradient(to right, #23bb62, #1fc5c1);">
+<%- include('./partial/navbar.ejs') %>
+
+<div class="container py-4 my-4 mx-auto d-flex flex-column" style="background-color: #000; border-radius: 10px;">
+    <div class="header">
+        <div class="row r1">
+            <div class="col-md-9 abc">
+                <h1 style="color: rgb(0, 255, 21);">
+                <% if (product === 'smart-phone') { %>
+                    Samsung S21
+                <% } else if (product === 'Laptop') { %>
+                    HP Laptop
+                <% } else if (product === 'watch') { %>
+                    Fire-Boltt Ninja Call Pro
+                <% }else if (product === 'home-assistant') { %>
+                    Smart Home Assistant
+                <% }else if (product === 'sofa') { %>
+                    Modern Sofa
+                <% }else if (product === 'dinning-table') { %>
+                    Elegant Dining Table
+                <% }else if (product === 'armchair') { %>
+                    Cozy Armchair
+                <% }else if (product === 'bedroom') { %>
+                    Stylish Bedroom Set
+                <% }else if (product === 'shirt') { %>
+                    Checked Shirt
+                <% }else if (product === 'pant') { %>
+                    Jean pant
+                <% }else if (product === 'saree') { %>
+                    Saree
+                <% }else if (product === 'chudidar') { %>
+                    Chudidar
+                <% }else if (product === 'foundation') { %>
+                    Flawless Foundation
+                <% }else if (product === 'lipstick') { %>
+                    Vibrant Lipstick Shades
+                <% }else if (product === 'eyeshadow') { %>
+                    Eyeshadow Palettes
+                <% }else if (product === 'skincare') { %>
+                    Revitalizing Skincare Sets
+                <% }else { %>
+                    Play Station 5
+                <% } %>
+            </h1>
+            </div>
+            <div class="col-md-3 text-right pqr"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+            <p class="text-right text-light para">Based on 250 Review</p>
+        </div>
+    </div>
+    <div class="container-body mt-4">
+        <div class="row r3">
+            <div class="col-md-5 p-0 klo">
+                <ul class="li text-light">
+                    <li>100% Quality</li>
+                    <li>Free Shipping</li>
+                    <li>Easy Returns</li>
+                    <li>12 Months Warranty</li>
+                    <li>EMI Starting from (On Credit Cards)</li>
+                    <li>Normal Delivery : 4-5 Days</li>
+                    <li>Express Delivery : 2-3 Days</li>
+                    <li>COD Available (All Over India)</li>
+                </ul>
+            </div>
+            <div class="col-md-7"> <img src="https://assetscdn1.paytm.com/images/catalog/product/K/KI/KIDTORADO-MUSCUTORA65799297FD22C/1564571511644_0.jpg" width="90%" height="95%"> </div>
+        </div>
+    </div>
+    <div class="foot d-flex flex-column mt-5 ">
+        <div class="row r4 ">
+            <div class="col-md-2 myt des"><a href="#">Description</a></div>
+            <div class="col-md-2 myt "><a href="#">Review</a></div>
+            <div class="col-md-2 mio offset-md-4"><a href="#">ADD TO CART</a></div>
+            <div class="col-md-2 myt "><button type="button" class="btn buy"><a href="#" >BUY NOW</a></button></div>
+        </div>
+    </div>
+</div>
+<%- include('./partial/footer.ejs') %>
+<%- include('./partial/script.ejs') %>
+</body>
+</html>
