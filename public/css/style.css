@@ -15,12 +15,15 @@ body {
     font-size: 30px;
     padding: 10px;
     color: white !important;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Ubuntu', sans-serif !important;
 }
 .nav-link{
     margin: 0 15px;
     color: white !important;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Ubuntu', sans-serif !important;
+}
+.nav-link:hover{
+    text-decoration: underline;
 }
 #in,#up{
     background-color: white;

@@ -8,8 +8,16 @@ const details = (req,res) => {
     const product = req.query.product;
     res.render('details', { title: product ,product });
 }
+const signin = (req,res) => {
+    res.render('signin')
+}
+const signup = (req,res) => {
+    res.render('signup')
+}
 module.exports = {
     index,
     product,
-    details
+    details,
+    signin,
+    signup
 }

@@ -63,7 +63,43 @@
                     <li>COD Available (All Over India)</li>
                 </ul>
             </div>
-            <div class="col-md-7"> <img src="https://assetscdn1.paytm.com/images/catalog/product/K/KI/KIDTORADO-MUSCUTORA65799297FD22C/1564571511644_0.jpg" width="90%" height="95%"> </div>
+            <div class="col-md-7"> 
+                <% if (product === 'smart-phone') { %>
+                    <img src="/img/d-mobile.jpeg" width="90%" height="95%">
+                <% } else if (product === 'Laptop') { %>
+                    <img src="/img/d-laptop.jpeg" width="90%" height="95%">
+                <% } else if (product === 'watch') { %>
+                    <img src="/img/d-watch.jpeg" width="90%" height="95%">
+                <% }else if (product === 'home-assistant') { %>
+                    <img src="/img/d-home.jpeg" width="90%" height="95%">
+                <% }else if (product === 'sofa') { %>
+                    <img src="/img/g-sofa.jpeg" width="90%" height="95%">
+                <% }else if (product === 'dinning-table') { %>
+                    <img src="/img/g-table.jpeg" width="90%" height="95%">
+                <% }else if (product === 'armchair') { %>
+                    <img src="/img/g-armchair.jpeg" width="90%" height="95%">
+                <% }else if (product === 'bedroom') { %>
+                    <img src="/img/g-bedroom.jpeg" width="90%" height="95%">
+                <% }else if (product === 'shirt') { %>
+                    <img src="/img/g-shirt.jpeg" width="90%" height="95%">
+                <% }else if (product === 'pant') { %>
+                    <img src="/img/g-pant.jpeg" width="90%" height="95%"> 
+                <% }else if (product === 'saree') { %>
+                    <img src="/img/g-saree.jpeg" width="90%" height="95%">
+                <% }else if (product === 'chudidar') { %>
+                    <img src="/img/g-chudidar.jpeg" width="90%" height="95%">
+                <% }else if (product === 'foundation') { %>
+                    <img src="/img/g-foundation.jpeg" width="90%" height="95%">
+                <% }else if (product === 'lipstick') { %>
+                    <img src="/img/g-lipstick.jpeg" width="90%" height="95%">
+                <% }else if (product === 'eyeshadow') { %>
+                    <img src="/img/g-palette.jpeg" width="90%" height="95%">
+                <% }else if (product === 'skincare') { %>
+                    <img src="/img/g-makeup.jpeg" width="90%" height="95%">
+                <% }else { %>
+                    <img src="/img/d-ps5.jpeg" width="90%" height="95%">
+                <% } %>
+             </div>
         </div>
     </div>
     <div class="foot d-flex flex-column mt-5 ">
