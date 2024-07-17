@@ -109,3 +109,7 @@ body{
   background: linear-gradient(90deg, #494949, #222222);
   box-shadow: 1px 5px 9px rgba(211, 211, 211, .9);
 }
+input[type=submit]{
+  color: white;
+  border-radius: 10px;
+}

@@ -13,14 +13,15 @@
             <a href="/signup" class="login">Signup</a>
         </div>
 
-        <form class="form">
-            <input type="email" placeholder="Email Address" class="email">
-            <input type="password" placeholder="password" class="pass">
-        </form>
+        <form class="form" method="POST" action="/signin">
+            <input type="email" name="email" placeholder="Email Address" class="email">
+            <input type="password" name="password" placeholder="password" class="pass">
+            <!-- <input type="password" placeholder="Confirm Password" class="confirm_pass"> -->
+        
 
         <a href="#" class="fp">Forgot password?</a>
-
-            <button type="submit" class="login_btn">Sign-In</button>
+            <input type="submit" value="Sign-Up" class="login_btn">
+        </form>
     </div>
         
 </body>
