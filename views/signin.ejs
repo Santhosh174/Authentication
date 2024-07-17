@@ -23,6 +23,13 @@
             <input type="submit" value="Sign-Up" class="login_btn">
         </form>
     </div>
-        
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit',async(e)=>{
+            e.preventDefault();
+            const email = form.email.value;
+            const password = form.password.value;
+        })
+    </script>
 </body>
 </html>
