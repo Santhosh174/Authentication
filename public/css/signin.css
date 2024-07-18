@@ -37,10 +37,12 @@ body{
 .card a.fp{
   width: 100%;
   display: flex;
-  color: #000000;
+  color: #5a5a5a;
   text-decoration: underline;
 }
-
+.email.error,.password.error{
+  color: red;
+}
 .login_register{
   display: flex;
   width: 100%;

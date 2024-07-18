@@ -15,20 +15,49 @@
 
         <form class="form" method="POST" action="/signin">
             <input type="email" name="email" placeholder="Email Address" class="email">
+            <div class="email error"></div>
             <input type="password" name="password" placeholder="password" class="pass">
+            <div class="password error"></div>
             <!-- <input type="password" placeholder="Confirm Password" class="confirm_pass"> -->
         
 
         <a href="#" class="fp">Forgot password?</a>
-            <input type="submit" value="Sign-Up" class="login_btn">
+            <input type="submit" value="Sign-In" class="login_btn">
         </form>
     </div>
     <script>
         const form = document.querySelector('form');
+            const emailError = document.querySelector('.email.error')
+            const passwordError = document.querySelector('.password.error')
+
         form.addEventListener('submit',async(e)=>{
             e.preventDefault();
-            const email = form.email.value;
-            const password = form.password.value;
+
+                emailError.textContent = '';
+                passwordError.textContent = ''; 
+
+                const email = form.email.value;
+                const password = form.password.value;
+
+                try{
+                    const res = await fetch('/signin',{
+                        method:'POST',
+                        body : JSON.stringify({email,password}),
+                        headers : {'content-type':'application/json'}
+                    })
+                    const data = await res.json();
+                    console.log(data)
+                    if(data.errors){
+                        emailError.textContent = data.errors.email;
+                        passwordError.textContent = data.errors.password;
+                    }
+                    if(data.new_user){
+                        location.assign('/')
+                    }
+                }
+                catch(err){
+                    console.log(err)
+                }
         })
     </script>
 </body>
