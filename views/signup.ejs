@@ -60,8 +60,8 @@
                         nameError.textContent = data.errors.name;
                         passwordError.textContent = data.errors.password;
                     }
-                    if(data.new_user){
-                        location.assign('/')
+                    if(data.tempUserId){
+                        location.assign(`/otp?tempUserId=${data.tempUserId}&email=${email}`);
                     }
                 }
                 catch(err){

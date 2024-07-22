@@ -197,4 +197,24 @@ body {
     padding: 15px;
     border-radius: 10px;
 }
-
+.prof{
+    display: flex;
+    justify-content: center;
+}
+.edit a{
+    background-color: rgb(7, 211, 0);
+    color: rgb(255, 255, 255);
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}
+.logout a{
+    margin-left: 4vh;
+    background-color: red;
+    color: rgb(255, 255, 255);
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}

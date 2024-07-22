@@ -1,5 +1,10 @@
+require('dotenv').config();
 const user = require('../models/users')
 const jwt = require('jsonwebtoken')
+const UserOTPVerification = require('../models/UserOTPVerification')
+const bcrypt = require('bcrypt'); // Make sure to import bcrypt
+const nodemailer = require('nodemailer'); // Assuming you have a configured transporter
+const ObjectId = require('mongodb').ObjectId;
 
 const handleErrors = (err) =>{
     console.log(err.message,err.code);
@@ -51,6 +56,13 @@ const signin = (req,res) => {
 const signup = (req,res) => {
     res.render('signup')
 }
+const otpp = (req,res) => {
+    const { tempUserId , email} = req.query;
+    res.render('otp', { tempUserId,email });
+}
+const profile = (req,res) => {
+    res.render('profile', { title: "profile" })
+}
 const signin_post = async(req,res) => {
     const {email,password} = req.body;
     try{
@@ -64,24 +76,155 @@ const signin_post = async(req,res) => {
         res.status(400).json({errors})
     }
 }
-const signup_post = async(req,res) => {
-    const {email,name,password} = req.body;
-    try{
-        const new_user = await user.create({email,name,password})
-        const token = createToken(new_user._id)
-        res.cookie('jwt',token,{ httpOnly: true , maxAge : maxAge *1000})
-        res.status(201).json({new_user:new_user._id});
-    }
-    catch (err) {
+
+const tempUserStorage = new Map(); 
+
+const signup_post = async (req, res) => {
+    const { email, name, password } = req.body;
+    try {
+        // Temporarily store user data in memory
+        const tempUserId = new ObjectId().toString(); 
+        console.log(tempUserId)// Generate a temporary ID
+        tempUserStorage.set(tempUserId, { email, name, password });
+
+        const otpResponse = await sendOTP({ _id: tempUserId, email });
+        res.status(201).json({ 
+            tempUserId, 
+            otpResponse,
+            email
+        });
+    } catch (err) {
         const errors = handleErrors(err);
-        res.status(400).json({errors})
+        res.status(400).json({ errors });
     }
-    res.render('signup')
-}
+};
+ let transporter = nodemailer.createTransport({
+    host : "smtp-mail.outlook.com",
+    port: 587, 
+    secure: false, 
+    auth : {
+        user : process.env.AUTH_EMAIL,
+        pass : process.env.AUTH_PASS,
+    },
+ })
 
 const logout = (req,res)=>{
     res.cookie('jwt','',{maxAge:1});
     res.redirect('/');
+}
+
+//otp
+const sendOTP = async ({ _id, email }) => {
+    try {
+        const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
+        const mailOption = {
+            from: process.env.AUTH_EMAIL,
+            to: email,
+            subject: 'FlipZon : Verify Your Email',
+            html: `<p> Enter <b style="color: blue;">${otp}</b> in the app to verify your email address and complete the signup process. </p> <p>This code expires in <b>1 hour</b></p>`
+        };
+        const saltRounds = 10;
+        const hashedotp = await bcrypt.hash(otp, saltRounds); 
+        const newOTPVerification = new UserOTPVerification({
+            userId: _id,
+            otp: hashedotp,
+            createdAt: Date.now(),
+            expiresAt: Date.now() + 3600000
+        });
+        await newOTPVerification.save();
+        await transporter.sendMail(mailOption);
+        return( {
+            status: "PENDING",
+            message: "Verification OTP mail sent",
+            data: {
+                userId: _id,
+                email,
+            }
+        });
+    } catch (err) {
+        console.error("Error sending OTP email:", err);
+        throw new Error("Failed to send OTP email.");
+    }
+};
+transporter.verify(function(error, success) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("Server is ready to take our messages");
+    }
+});
+
+//verify otp
+const verifyotp = async (req, res) => {
+    try {
+        let { userId, otp } = req.body;
+        if (!userId || !otp) {
+            throw Error("Empty OTP or userId are not allowed");
+        }
+
+        const UserOTPVerificationRecords = await UserOTPVerification.find({ userId });
+
+        if (UserOTPVerificationRecords.length <= 0) {
+            throw Error("Account record doesn't exist. Please sign up.");
+        }
+
+        const { expiresAt } = UserOTPVerificationRecords[0];
+        const hashedOTP = UserOTPVerificationRecords[0].otp;
+
+        if (expiresAt < Date.now()) {
+            await UserOTPVerification.deleteMany({ userId });
+            throw new Error("Code has expired. Please request again.");
+        }
+
+        const validOTP = await bcrypt.compare(otp, hashedOTP);
+        if (!validOTP) {
+            throw new Error("Invalid code passed. Check your inbox.");
+        }
+
+        const tempUserData = tempUserStorage.get(userId);
+        if (!tempUserData) {
+            throw new Error("User data not found. Please sign up again.");
+        }
+
+        // Create user in the database
+        const newUser = await user.create(tempUserData);
+        await UserOTPVerification.deleteMany({ userId });
+        tempUserStorage.delete(userId); 
+        const token = createToken(newUser._id)
+        res.cookie('jwt',token,{ httpOnly: true , maxAge : maxAge *1000})
+
+        res.json({
+            status: "VERIFIED",
+            message: "User email verified successfully",
+            new_user: newUser._id,
+        });
+    } catch (err) {
+        res.json({
+            status: "FAILED",
+            message: err.message,
+        });
+    }
+};
+
+
+//resend otp
+const resendotp = async(req,res) =>{
+    try{
+        let { userId,email } = req.body;
+        if(!userId || !email){
+            throw Error("Empty user details are not allowed")
+        }else{
+            await UserOTPVerification.deleteMany({userId});
+            const otpResponse = await sendOTP({ _id: userId, email });
+        res.status(200).json(otpResponse);
+        }
+    }
+    catch(err){
+        return({
+            status:"FAILED",
+            message:err.message
+        })
+    }
 }
 
 module.exports = {
@@ -90,7 +233,11 @@ module.exports = {
     details,
     signin,
     signup,
+    otpp,
     signin_post,
     signup_post,
-    logout
+    logout,
+    profile,
+    verifyotp,
+    resendotp
 }

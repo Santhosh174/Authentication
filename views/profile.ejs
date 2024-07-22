@@ -1,0 +1,29 @@
+<html lang="en">
+    <%- include('./partial/head.ejs') %> 
+<body>
+    <!--navbar-->
+ <%- include('./partial/navbar.ejs') %>
+ <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-8 col-10">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h1 class="card-title">Profile</h1>
+                    <p style="font-size: 20px;" class="card-text"><strong style="color: blue;font-size: 25px;">Name : </strong> <%- User.name %></p>
+                    <p style="font-size: 20px;"  class="card-text"><strong style="color: blue;font-size: 25px;">Email : </strong> <%- User.email %></p>
+                    <div class="prof">
+                        <div class="edit">
+                            <a href="/edit">Edit name</a>
+                        </div>
+                        <div class="logout">
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

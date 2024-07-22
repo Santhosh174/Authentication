@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
@@ -28,12 +29,3 @@ app.get('/home',(req,res)=>{
     res.redirect('/');
 })
 
-
-// //cookies
-// app.get('/set-cookies',(req,res)=>{
-//     // res.setHeader('Set-Cookie','newUser=true')
-//     res.cookie('newUser',false)
-//     res.cookie('isEmployee',true,{maxAge : 1000 * 60 * 60 * 24, httpOnly:true})
-
-//     res.send('you got cookies')
-// })

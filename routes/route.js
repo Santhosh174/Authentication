@@ -12,5 +12,8 @@ route.get('/signup',controller.signup);
 route.post('/signin',controller.signin_post);
 route.post('/signup',controller.signup_post);
 route.get('/logout',controller.logout)
-
+route.get('/profile',requireAuth,controller.profile)
+route.get('/otp',requireAuth,controller.otpp)
+route.post('/verifyotp',controller.verifyotp)
+route.post('/resendotp',controller.resendotp)
 module.exports = route;

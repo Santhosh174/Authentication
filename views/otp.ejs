@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+    <style>
+        .otpcent {
+            margin: 10vh auto;
+            width: 50%;
+            text-align: center;
+            padding: 40px;
+            border-radius: 8px;
+            background-color: black;
+        }
+        h2 {
+            color: red;
+        }
+        p {
+            color: white;
+            font-size: 20px;
+        }
+        input[type=text] {
+            padding: 10px;
+            margin: 5vh 0;
+        }
+        input[type=submit] {
+            background-color: red;
+            color: white;
+            padding: 8px;
+            border: none;
+            width: 100px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="otpcent">
+        <h2>Please enter the one-time password to verify your account</h2>
+        <p>A code has been sent to your email <%= email %>.</p>
+        <form id="otpForm">
+            <input type="text" placeholder="Enter your OTP" name="otp">
+            <input type="hidden" name="userId" value="<%= tempUserId %>">
+            <div class="otp error"></div><br>
+            <input type="submit" value="Verify">
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById('otpForm');
+        const otpError = document.querySelector('.otp.error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            otpError.textContent = '';
+
+            const otp = form.otp.value.trim();
+            const userId = form.userId.value;
+
+            try {
+                const res = await fetch('/verifyotp', {
+                    method: 'POST',
+                    body: JSON.stringify({ userId, otp }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const data = await res.json();
+                console.log(data);
+
+                if (data.errors) {
+                    otpError.textContent = data.errors.otp;
+                }
+
+                if (data.status === "VERIFIED") {
+                    location.assign('/');
+                } else {
+                    alert(data.message);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
+</body>
+</html>
