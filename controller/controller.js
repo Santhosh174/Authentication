@@ -2,9 +2,10 @@ require('dotenv').config();
 const user = require('../models/users')
 const jwt = require('jsonwebtoken')
 const UserOTPVerification = require('../models/UserOTPVerification')
-const bcrypt = require('bcrypt'); // Make sure to import bcrypt
-const nodemailer = require('nodemailer'); // Assuming you have a configured transporter
+const bcrypt = require('bcrypt'); 
+const nodemailer = require('nodemailer'); 
 const ObjectId = require('mongodb').ObjectId;
+
 
 const handleErrors = (err) =>{
     console.log(err.message,err.code);
@@ -84,7 +85,6 @@ const signup_post = async (req, res) => {
     try {
         // Temporarily store user data in memory
         const tempUserId = new ObjectId().toString(); 
-        console.log(tempUserId)// Generate a temporary ID
         tempUserStorage.set(tempUserId, { email, name, password });
 
         const otpResponse = await sendOTP({ _id: tempUserId, email });
@@ -208,24 +208,56 @@ const verifyotp = async (req, res) => {
 
 
 //resend otp
-const resendotp = async(req,res) =>{
-    try{
-        let { userId,email } = req.body;
-        if(!userId || !email){
-            throw Error("Empty user details are not allowed")
-        }else{
-            await UserOTPVerification.deleteMany({userId});
+const resendotp = async (req, res) => {
+    try {
+        let { userId, email } = req.body;
+        if (!userId || !email) {
+            throw Error("Empty user details are not allowed");
+        } else {
+            await UserOTPVerification.deleteMany({ userId });
             const otpResponse = await sendOTP({ _id: userId, email });
-        res.status(200).json(otpResponse);
+            res.status(200).json({
+                status: "SUCCESS",
+                message: "OTP resent successfully",
+                otpResponse
+            });
         }
+    } catch (err) {
+        res.status(400).json({
+            status: "FAILED",
+            message: err.message
+        });
     }
-    catch(err){
-        return({
-            status:"FAILED",
-            message:err.message
-        })
+};
+
+
+const edit = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const User = await user.findById(userId);
+        if (!User) {
+            return res.status(404).send('User not found.');
+        }
+
+        res.render('edit-name', { title:"Edit-Name",User: User });
+    } catch (err) {
+        console.error('Error fetching user data:', err);
+        res.status(500).send('Error fetching user data.');
     }
-}
+};
+
+const updatename = async (req, res) => {
+    const { name, userId } = req.body;
+
+    try {
+        await user.findByIdAndUpdate(userId, { name });
+        res.redirect('/profile');
+    } catch (err) {
+        res.status(500).send('Error updating name.');
+    }
+};
+
 
 module.exports = {
     index,
@@ -239,5 +271,7 @@ module.exports = {
     logout,
     profile,
     verifyotp,
-    resendotp
+    resendotp,
+    edit,
+    updatename
 }

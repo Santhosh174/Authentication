@@ -5,13 +5,20 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const port = 5000;
 const route = require('./routes/route')
+const session = require('express-session');
 
+app.use(session({
+    secret: 'santhosh secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 app.listen(port, () => {
     console.log(`App is running on localhost:${port}`);
 });
 
 const db = 'mongodb+srv://santhosh_18:santhosh1818@santhosh.q56f2et.mongodb.net/?retryWrites=true&w=majority'
-mongoose.connect(db)
+mongoose.connect(db,{useNewUrlParser:true,useUnifiedTopology:true})
     .then((result)=> console.log('connected to db'))
     .catch((err)=> console.log(err));
 

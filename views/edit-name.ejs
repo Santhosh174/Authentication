@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partial/head.ejs') %> 
+
+    <body style="background: linear-gradient(to right, #23bb62, #1fc5c1);">
+    <!--navbar-->
+    <%- include('./partial/navbar.ejs') %>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-8 col-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Edit Name</h1>
+                        <form action="/updatename" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">New Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<%- User.name %>" required>
+                            </div>
+                            <input type="hidden" name="userId" value="<%- User._id %>">
+                            <button type="submit" class="btn btn-success w-100">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

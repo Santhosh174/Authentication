@@ -2,60 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP</title>
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        .otpcent {
-            margin: 10vh auto;
-            width: 50%;
+        body {
+            background: linear-gradient(to right, #23bb62, #1fc5c1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .otp-container {
+            max-width: 400px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .otp-letter-input {
+            width: 100%;
+            height: 60px;
+            border: 1px solid #198754;
+            border-radius: 10px;
+            color: #198754;
+            font-size: 40px;
             text-align: center;
-            padding: 40px;
-            border-radius: 8px;
-            background-color: black;
-        }
-        h2 {
-            color: red;
-        }
-        p {
-            color: white;
-            font-size: 20px;
-        }
-        input[type=text] {
-            padding: 10px;
-            margin: 5vh 0;
-        }
-        input[type=submit] {
-            background-color: red;
-            color: white;
-            padding: 8px;
-            border: none;
-            width: 100px;
-            border-radius: 5px;
-            cursor: pointer;
             font-weight: bold;
+        }
+        .btn {
+            height: 45px;
+        }
+        .otp-error {
+            color: #dc3545; /* Bootstrap's danger color */
         }
     </style>
 </head>
 <body>
-    <div class="otpcent">
-        <h2>Please enter the one-time password to verify your account</h2>
-        <p>A code has been sent to your email <%= email %>.</p>
+    <div class="otp-container">
+        <div class="text-center">
+            <p class="text-success" style="font-size: 4rem;"><i class="fa-solid fa-envelope-circle-check"></i></p>
+            <p class="h5">Please check your email</p>
+            <p class="text-muted">We've sent a code to <%= email %>.</p>
+        </div>
         <form id="otpForm">
-            <input type="text" placeholder="Enter your OTP" name="otp">
+            <div class="row pt-3 pb-2">
+                <div class="col-3">
+                    <input class="otp-letter-input" type="text" name="otp1" maxlength="1">
+                </div>
+                <div class="col-3">
+                    <input class="otp-letter-input" type="text" name="otp2" maxlength="1">
+                </div>
+                <div class="col-3">
+                    <input class="otp-letter-input" type="text" name="otp3" maxlength="1">
+                </div>
+                <div class="col-3">
+                    <input class="otp-letter-input" type="text" name="otp4" maxlength="1">
+                </div>
+            </div>
             <input type="hidden" name="userId" value="<%= tempUserId %>">
-            <div class="otp error"></div><br>
-            <input type="submit" value="Verify">
+            <div class="otp-error" id="otpError"></div><br>
+            <div class="row pt-4">
+                <div class="col-6">
+                    <button type="button" class="btn btn-outline-secondary w-100">Cancel</button>
+                </div>
+                <div class="col-6">
+                    <input type="submit" class="btn btn-success w-100" value="Verify">
+                </div>
+            </div>
         </form>
+        <p class="text-muted text-center mt-3">Didn't get the code? <a href="#" class="text-success" id="resendOTP">Click to resend.</a></p>
+        <div id="resendMessage" class="text-center text-dangers mt-2"></div>
     </div>
+
     <script>
         const form = document.getElementById('otpForm');
-        const otpError = document.querySelector('.otp.error');
+        const otpError = document.getElementById('otpError');
+        const inputs = document.querySelectorAll('.otp-letter-input');
+        const resendLink = document.getElementById('resendOTP');
+        const resendMessage = document.getElementById('resendMessage');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && index > 0 && input.value.length === 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             otpError.textContent = '';
 
-            const otp = form.otp.value.trim();
+            const otp = Array.from(inputs).map(input => input.value.trim()).join('');
             const userId = form.userId.value;
 
             try {
@@ -70,15 +120,42 @@
 
                 if (data.errors) {
                     otpError.textContent = data.errors.otp;
-                }
-
-                if (data.status === "VERIFIED") {
+                } else if (data.status === "VERIFIED") {
                     location.assign('/');
                 } else {
-                    alert(data.message);
+                    otpError.textContent = data.message || 'Verification failed. Please try again.';
                 }
             } catch (err) {
                 console.log(err);
+                otpError.textContent = 'An error occurred. Please try again.';
+            }
+        });
+
+        resendLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            resendMessage.textContent = '';
+
+            const userId = form.userId.value;
+            const email = '<%= email %>';
+
+            try {
+                const res = await fetch('/resendotp', {
+                    method: 'POST',
+                    body: JSON.stringify({ userId, email }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const data = await res.json();
+                console.log(data);
+
+                if (data.status === "SUCCESS") {
+                    resendMessage.textContent = 'OTP resent successfully to your email.';
+                } else {
+                    resendMessage.textContent = 'Failed to resend OTP. Please try again.';
+                }
+            } catch (err) {
+                console.log(err);
+                resendMessage.textContent = 'Failed to resend OTP. Please try again.';
             }
         });
     </script>

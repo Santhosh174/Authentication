@@ -13,7 +13,9 @@ route.post('/signin',controller.signin_post);
 route.post('/signup',controller.signup_post);
 route.get('/logout',controller.logout)
 route.get('/profile',requireAuth,controller.profile)
-route.get('/otp',requireAuth,controller.otpp)
+route.get('/otp',controller.otpp)
 route.post('/verifyotp',controller.verifyotp)
 route.post('/resendotp',controller.resendotp)
+route.get('/edit/:id',controller.edit)
+route.post('/updatename',controller.updatename)
 module.exports = route;
