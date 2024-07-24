@@ -6,7 +6,72 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer'); 
 const ObjectId = require('mongodb').ObjectId;
 
+const crypto = require('crypto');
+const initiatePasswordReset = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const User = await user.findOne({ email });
+        if (!User) {
+            return res.status(400).json({ error: 'No user with that email' });
+        }
 
+        // Generate a reset token
+        const token = crypto.randomBytes(32).toString('hex');
+        User.resetToken = token;
+        User.resetTokenExpiry = Date.now() + 3600000; // Token valid for 1 hour
+        await User.save();
+
+        // Send email with the reset link
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'santhoshcse18@gmail.com',
+                pass: 'rswb cvty xcfa unoj',
+            },
+        });
+
+        const mailOptions = {
+            to: User.email,
+            from: 'santhoshcse18@gmail.com',
+            subject: 'FlipZon Password Reset',
+            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+            Please click on the following link, or paste this into your browser to complete the process:\n\n
+            http://${req.headers.host}/reset-password/${token}\n\n
+            If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Password reset link sent to email' });
+    } catch (err) {
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    try {
+        const User = await user.findOne({
+            resetToken: token,
+            resetTokenExpiry: { $gt: Date.now() },
+        });
+
+        if (!User) {
+            return res.status(400).json({ error: 'Invalid or expired token' });
+        }
+
+        // Hash the new password
+        User.password = password;
+        User.resetToken = undefined;
+        User.resetTokenExpiry = undefined;
+        await User.save();
+
+        res.status(200).json({ message: 'Password reset successful' });
+    } catch (err) {
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+}
 const handleErrors = (err) =>{
     console.log(err.message,err.code);
     let errors = {email :'',password:''};
@@ -56,6 +121,9 @@ const signin = (req,res) => {
 }
 const signup = (req,res) => {
     res.render('signup')
+}
+const rp = (req,res) => {
+    res.render('reset-password')
 }
 const otpp = (req,res) => {
     const { tempUserId , email} = req.query;
@@ -273,5 +341,8 @@ module.exports = {
     verifyotp,
     resendotp,
     edit,
-    updatename
+    updatename,
+    initiatePasswordReset,
+    resetPassword,
+    rp
 }

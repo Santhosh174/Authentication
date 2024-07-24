@@ -19,11 +19,13 @@ const user_schema = new mongoose.Schema({
         type:String,
         required:[true,'Please enter a password'],
         minLength:[6,'Minimum password length is 6 characters']
-    }
+    },
+    resetToken: String,
+    resetTokenExpiry: Date
 })
 
 user_schema.post('save',function(doc,next){
-    console.log('new user was created and saved',doc)
+    
     next();
 })
 

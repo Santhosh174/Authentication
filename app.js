@@ -18,7 +18,7 @@ app.listen(port, () => {
 });
 
 const db = 'mongodb+srv://santhosh_18:santhosh1818@santhosh.q56f2et.mongodb.net/?retryWrites=true&w=majority'
-mongoose.connect(db,{useNewUrlParser:true,useUnifiedTopology:true})
+mongoose.connect(db)
     .then((result)=> console.log('connected to db'))
     .catch((err)=> console.log(err));
 
