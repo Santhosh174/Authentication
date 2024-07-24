@@ -23,4 +23,6 @@ route.post('/updatename',controller.updatename)
 route.post('/forgot-password', controller.initiatePasswordReset);
 route.get('/reset-password/:token', controller.rp);
 route.post('/reset-password/:token', controller.resetPassword);
+route.get('/404-Error',controller.e404)
+
 module.exports = route;

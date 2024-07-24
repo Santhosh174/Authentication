@@ -7,11 +7,11 @@
  <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-10">
-            <div class="card">
+            <div class="card" id="card1">
                 <div class="card-body ">
                     <h1 class="card-title text-center">Profile</h1>
-                    <p style="font-size: 20px;" class="card-text text-start"><strong style="color: blue;font-size: 25px;">Name : </strong> <%- User.name %></p>
-                    <p style="font-size: 20px;"  class="card-text text-start"><strong style="color: blue;font-size: 25px;">Email : </strong> <%- User.email %></p>
+                    <p style="color: #005ba5;font-size: 20px;" class="card-text text-start"><strong style="color: #000000;font-size: 25px;">Name : </strong> <%- User.name %></p>
+                    <p style="color: #005ba5;font-size: 20px;"  class="card-text text-start"><strong style="color: #000000;font-size: 25px;">Email : </strong> <%- User.email %></p>
                     <div class="prof">
                         <div class="edit">
                             <a href="/edit/<%- User.id %>">Edit name</a>
@@ -25,6 +25,8 @@
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

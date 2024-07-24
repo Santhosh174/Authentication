@@ -34,6 +34,13 @@ body {
 #in:hover,#up:hover{
     background-color: rgb(167, 255, 159);
 }
+.navbar-toggler {
+    border: 2px solid white !important; /* Remove border if you don't want it */
+}
+
+.navbar-toggler-icon {
+    color: #fff !important;
+}
 .sticky {
     position: fixed;
     top: 0;
@@ -197,12 +204,19 @@ body {
     padding: 15px;
     border-radius: 10px;
 }
+#card1{
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
 .prof{
     display: flex;
     justify-content: center;
 }
 .edit a{
-    background-color: rgb(7, 211, 0);
+    background-color: #23bb62;
     color: rgb(255, 255, 255);
     padding: 8px;
     border-radius: 5px;
@@ -211,10 +225,111 @@ body {
 }
 .logout a{
     margin-left: 4vh;
-    background-color: red;
+    background-color: rgb(207, 46, 46);
     color: rgb(255, 255, 255);
     padding: 8px;
     border-radius: 5px;
     text-align: center;
     width: 100px;
+}
+
+@media (max-width: 768px) {
+    #in,#up{
+        margin-top: 1vh;
+        width: 20vw;
+    }
+    .head{
+    min-height: 100%;
+    display: block;
+    justify-content: center;
+}
+.head .content{
+    margin: 0% 0% 0% 0%;
+    padding: 4vh 0vw;
+}
+.head .content h1{
+    font-size: 45px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+
+}
+.head .content p{
+    text-align: center;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 4vh;
+}
+.head .content a{
+    display: flex;
+    justify-content: center;
+    width: 35vw;
+    margin: auto;
+}
+.head .head-pic{
+    margin:  auto 10vw;
+    padding-bottom: 20px;
+    width: 80%;
+    height: 80%;
+}
+.head .head-pic img{
+   display: none;
+   width: 100%;
+   height: 100%;
+}
+.discover{
+    padding: 7vh 0vw;
+}
+.discover h1{
+    width: 80%;
+    font-size: 2.5rem;
+}
+.discover p{
+    margin: 3vh auto;
+    font-size: 17px;
+    width: 90%;
+}
+.custom-carousel {
+    width: 80%; 
+  }
+  .custom-carousel .carousel-inner img {
+    height: 30vh;
+    object-fit: cover; 
+  }
+  .special {
+    padding: 10% 2% 7% 2%;
+}
+
+.carrd {
+    margin: 3% 2%;
+    width: 40%; 
+}
+.carrd img {
+    height: 30vh;
+}
+
+.special .off {
+    position: absolute;
+    bottom: 0; 
+    left: 4vw;
+    padding: 1px; 
+    width: 80%;
+}
+.special .off h4 {
+    font-size: 1rem; 
+    margin: 0vh;
+    padding-top: 1vh; 
+}
+
+.special .off p {
+    font-size: 1rem;
+    margin: 0;
+}
+.special a{
+    width: 50%;
+}
+#myBtn {
+    right: 10vw;
+    padding: 20px;
+}
 }

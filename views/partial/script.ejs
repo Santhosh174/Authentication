@@ -1,23 +1,24 @@
 <script>
 
-    let navbar = document.querySelector("nav");
-    
-    
-        let mybutton = document.getElementById("myBtn");
-        window.onscroll = function () { scrollFunction() };
-        function scrollFunction() {
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+let navbar = document.querySelector("nav");
+    let mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             navbar.classList.add("sticky");
             mybutton.style.display = "block";
-          } else {
+        } else {
             navbar.classList.remove("sticky");
             mybutton.style.display = "none";
-          }
         }
-        function topFunction() {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
     
         document.querySelectorAll('.cat button').forEach(button => {
             button.addEventListener('click', function() {

@@ -326,7 +326,9 @@ const updatename = async (req, res) => {
     }
 };
 
-
+const e404 = (req,res)=>{
+    res.render('404');
+}
 module.exports = {
     index,
     product,
@@ -344,5 +346,6 @@ module.exports = {
     updatename,
     initiatePasswordReset,
     resetPassword,
-    rp
+    rp,
+    e404
 }
