@@ -21,7 +21,7 @@ const initiatePasswordReset = async (req, res) => {
         User.resetTokenExpiry = Date.now() + 3600000; // Token valid for 1 hour
         await User.save();
 
-        // Send email with the reset link
+
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
@@ -151,7 +151,12 @@ const tempUserStorage = new Map();
 const signup_post = async (req, res) => {
     const { email, name, password } = req.body;
     try {
-        // Temporarily store user data in memory
+
+        const existingUser = await user.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ errors: { email: 'Email is already registered' } });
+        }
+
         const tempUserId = new ObjectId().toString(); 
         tempUserStorage.set(tempUserId, { email, name, password });
 
