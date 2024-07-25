@@ -116,6 +116,17 @@
 }
 
 @media screen and (max-width: 620px) {
+
+    .cat button{
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        background: white;
+        border: 2px solid black;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 8px;
+        margin: 4vh 1vw;
+    }
     .container {
         width: 98%;
         display: flex;

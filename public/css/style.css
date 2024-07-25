@@ -332,4 +332,27 @@ body {
     right: 10vw;
     padding: 20px;
 }
+#card1.card{
+    width: 90vw;
+    padding: 0%;
+    text-align: left;
+}
+#cont .row{
+    margin-left: -50px;
+}
+#card1 strong{
+    font-size: 20px !important;
+}
+#card1 P{
+    font-size: 20px !important;
+}
+.prof{
+    margin-top: 3vh;
+}
+#footpro,#footpro hr{
+    display: none;
+}
+footer hr{
+    display: none;
+}
 }
