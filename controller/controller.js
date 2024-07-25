@@ -96,9 +96,6 @@ const handleErrors = (err) =>{
             errors[properties.path] = properties.message;
         })
     }
-    else{
-      errors = err;
-    }
     return errors;
 }
 
